@@ -1,0 +1,168 @@
+\input{styles.tex}
+
+\def\header{%inkscape -D -z --file=bluegithub.svg --export-pdf=bluegithub.pdf --export-latex
+  \DTMsetdatestyle{my}%
+  \begin{tikzpicture}[every node/.style={inner ysep=0.1cm, inner xsep=0cm, anchor=north west}]
+    \coordinate (topleft) at (0, 0);
+    \coordinate (topright) at (\textwidth, 0);
+
+    \node[font=\Large] (name) at (topleft) {Leo Yan};
+    \node (bio) at (name.south west) {{\color{black!50!white}\emph{(\today)}} First year Electrical Engineering undergraduate at\ucsbicon{}\ucsbwordicon{}};
+
+    \node[anchor=north east, text width=0.4\textwidth, align=flush right, inner ysep=0cm] (contacts) at (topright)
+      {Leo Yan \\
+        {\color{link}\href{https://github.com/RustColeone/}{\githubicon{} RustColeone}}%
+          \IfFileExists{phone_number.txt}{\\ \input{phone_number.txt}}{}
+        };
+
+    \coordinate (bottomleft) at ($(bio.south west)+(0, -0.1cm)$);
+    \coordinate (bottomright) at ($(bottomleft)+(\textwidth, 0)$);
+
+    \path[use as bounding box] (topleft) rectangle (bottomright);
+
+    \path[draw] ($(bottomleft)+(-0.2cm,0)$) -- ($(bottomright)+(0.2cm,0)$);
+  \end{tikzpicture}%
+}
+
+\begin{document}
+  \header
+
+  \section{Education}
+
+  \begin{itemize}
+    \def\ongoing{%
+      \tikz[baseline=(t.base)]{
+        \node[fill=link!10!white, use as bounding box, inner sep=0.25em, font=\small] (t) {\textsc{1st year}}
+      }%
+    }
+    \item \ongoing{} \textbf{BS Electrical Engineering} \dashdiv{} University of California Santa Barbara \dashdiv{} 2019-2022
+
+      Relevant modules \& coursework (able to provide code upon request):
+
+      \begin{itemize}
+
+        \item Intro to ECE (C++)
+
+        \begin{itemize}
+          \item Using Arduino for problem solving and project buildings in C++.
+
+          \begin{itemize}
+            \item Digital to analog converter, using R2R Ladder
+            \item Experimented with different components and sensors
+            \item Built individual project \dashdiv{} Arduino Gaming Console
+          \end{itemize}
+        \end{itemize}
+
+        \item Signal Processing (Python)
+
+        \begin{itemize}
+          \item Learned basics to Signal Processing and applied knowledge with Python.
+          \begin{itemize}
+            \item Applied Fourier Transform to different signals to analyze them.
+            \item FIR Filters to smoothen images in lab.
+            \item Shannon's theories.
+          \end{itemize}
+        \end{itemize}
+
+        \item Computer Science (C++)
+
+        \begin{itemize}
+          \item Programming guidelines and basics
+          \item Modern tools for software developments in C++
+        \end{itemize}
+      \end{itemize}
+
+    \item \textbf{A-Level} \dashdiv{} (Shenzhen, China) Nanshan Chinese International College \dashdiv{} 2017-2019
+
+      Further Math, Math, Physics and Chemistry \dashdiv{} A*/A /A*/A /
+  \end{itemize}
+
+  \section{Skills}
+
+  \begin{itemize}[itemsep=0.1\parskip]
+    \item Languages: Java, C++, C\#, Python, Verilog, \LaTeX
+
+    \begin{itemize}
+      \item Currently learning C++ and Python
+      \item Has experience developing in Quartus
+      \item This documents and the notes I took in class are written in \LaTeX
+    \end{itemize}
+
+    \item Circuit Board Designs
+    \begin{itemize}
+      \item Familiar with developing Circuit Boards with PADs
+    \end{itemize}
+
+    \item Web development
+    \begin{itemize}
+      \item Worked with web developers in Tencent as an intern.
+    \end{itemize}
+    
+    \item Game development
+    \begin{itemize}
+      \item Building and designing games with Unity
+    \end{itemize}
+
+  \end{itemize}
+
+  \section{Personal Projects}
+
+  \def\ghurl#1{%
+    \href{#1}{({\blueghicon{}})}%
+  }
+
+  \begin{itemize}
+
+    \item \href{https://github.com/RustColeone/ArduinoDebugger}{\color{link}\textbf{Arduino Debugger}} \ghurl{https://github.com/RustColeone/ArduinoDebugger}: Single Step Arduino Debugging made cheap and affordable \dashdiv{} 2018 to date.
+
+    \begin{itemize}
+      \item PC and Arduino communicate through serial communication
+      \item HID, bluetooth and WiFi to be supported in the future
+      \item PC side runs library identical to Arduino but sents an command instead of executing
+      \item Arduino is programmed to translate the command into corresponding code and execute it
+    \end{itemize}
+
+    \item \href{https://github.com/RustColeone/ArduinoRemoteDisplay}{\color{link}\textbf{Arduino Remote Display}} \ghurl{https://github.com/RustColeone/ArduinoRemoteDisplay}: Remotelly update display with MQTT protocol\dashdiv{} Oct 2019 to date
+
+    \begin{itemize}
+      \item Translates an image file with C\# desktop application and sent using MQTT
+      \item Arduino receives and output the images to the epaper display
+      \item More display to be supported in the future
+      \item A test for adding wireless step by step debug function to Arduino Debugger
+    \end{itemize}
+
+    \item \textbf{GameBoy-Pi} \ghurl{https://github.com/RustColeone}: Gameboy built with Arduino \dashdiv{} 2018
+
+    \begin{itemize}
+      \item Circuit designed by me and manufactured by \href{https://jlcpcb.com/}{\color{link}JLCPCB}
+      \item Based on a Raspberry Pi 3B running \href{https://retropie.org.uk/}{\color{link}Retro Pie}
+      \item Bought the gameboy case, screen and other components online
+    \end{itemize}
+
+    \item \textbf{Arduino Calculator} \ghurl{https://github.com/RustColeone}: Arduino Calculator(Portable CLI)\dashdiv{} 2017
+
+    \begin{itemize}
+      \item The Arduino communicates with the Rasbberry Pi zero, and acts as a keyboard and display.
+      \item The display copy and outputs the CLI from the PI Zero.
+    \end{itemize}
+
+    \item \textbf{LED Goggle} \ghurl{https://github.com/RustColeone}: Inspired by Wrench (Watch Dogs 2)\dashdiv{} 2017-2018
+
+    \begin{itemize}
+      \item An goggle with LED Matrix built on to it
+      \item LED controlled by CMOS 164 shift register IC
+      \item Remotelly controlled with HC-05 bluetooth module and Arduino
+      \item \href{https://www.bilibili.com/video/av33283411/}{\color{link}Video Demonstration Here}
+    \end{itemize}
+
+  \end{itemize}
+
+  \section{Other Interests}
+
+  \begin{itemize}[itemsep=0.1\parskip]
+    \item Interested in animation and some arts; 
+    \item Been playing Piano for a long time;
+    \item Video Editiong, \href{https://www.bilibili.com/video/av55212868/}{\color{link}Graduation Video};
+  \end{itemize}
+
+\end{document}

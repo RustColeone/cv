@@ -1,0 +1,20 @@
+\def\newicon#1{%
+  \tikz[baseline=0.1em]{
+    \path[use as bounding box] (0, 0) rectangle (1em, 1em);
+    #1
+  }%
+}
+\def\newsvgicon#1#2{
+  \def\svgwidth{1em}%
+  \tikz[baseline=-#2]{\node[inner sep=0em, use as bounding box, text width=1em]{\input{#1}}}%
+}
+\def\newsvgiconsize#1#2#3{
+  \def\svgwidth{#3}%
+  \tikz[baseline=-#2]{\node[inner sep=0em, use as bounding box, text width=#3]{\input{#1}}}%
+}
+
+\def\ucsbicon{\newsvgicon{icons/UCSB.pdf_tex}{0.95em}}
+\def\ucsbwordicon{\newsvgiconsize{icons/ucsb-word.pdf_tex}{0.9em}{3em}}
+\def\githubicon{\newsvgicon{icons/github.pdf_tex}{0.85em}}
+\def\blueghicon{\hskip 0em\newsvgicon{icons/bluegithub.pdf_tex}{0.3em}}
+\def\trademark{™}

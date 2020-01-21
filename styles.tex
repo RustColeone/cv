@@ -1,0 +1,56 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage[calc,showdow,english]{datetime2}
+\usepackage[margin=1cm]{geometry}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usetikzlibrary{calc}
+\graphicspath{{icons/}}
+\input{icons.tex}
+
+\makeatletter
+\DeclareRobustCommand\tlabel{%
+  \tikz[overlay, remember picture, baseline=(nlabel.base)]{\node[anchor=base, inner sep=0pt] (nlabel) {};}%
+}
+\DeclareRobustCommand\posttlabel{%
+  \tikz[overlay, remember picture]{
+    \coordinate (ll) at (nlabel.south -| current page.north west);
+    \path[fill=link] ($(ll)-(0.1cm,0pt)$) rectangle ++(0.2cm, 0.9em);
+  }%
+}
+\renewcommand\section[1]{%
+  \@startsection{section}{1}{\z@}{0.1\baselineskip}{0.1\baselineskip \@minus 0.1\baselineskip}{\bfseries\MakeUppercase}*{\tlabel{}#1\makebox[0pt]{\posttlabel}}%
+}
+\makeatother
+
+\def\dashdiv{{%
+  \def\sp{0.3em minus 0.1em}%
+  \hspace{\sp}%
+  \color{black!50!white}%
+  --%
+  \hspace{\sp}%
+}}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em plus 0.5em minus 0.5em}
+
+\setitemize{topsep=0em, itemsep=0.5\parskip, partopsep=0em, parsep=0.5\parskip}
+
+\colorlet{link}{blue!50!black}
+
+\makeatletter
+\DTMnewdatestyle{my}{%
+  \renewcommand{\DTMDisplaydate}[4]{\DTMshortmonthname{##2} ##1}%
+  \renewcommand{\DTMdisplaydate}{\DTMDisplaydate}%
+}
+\DTMsetdatestyle{my}
+\usepackage[hidelinks, pdftex, pdfauthor={Leo Yan}, pdftitle={Leo Yan - \today}]{hyperref}
+\makeatother
+
+\pagestyle{empty}%
