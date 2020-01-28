@@ -1,0 +1,37 @@
+\def\shield#1#2#3#4#5#6{
+    \definecolor{LHScolor}{HTML}{#1}
+    \definecolor{RHScolor}{HTML}{#3}
+    \tcbsidebyside[
+        bicolor,
+        sidebyside,
+        sidebyside adapt=both,
+        sidebyside gap=5pt,
+        top=0pt,left=0pt,right=0pt,bottom=0pt,
+        boxrule=0pt,rounded corners,
+        interior style={top color=LHScolor,bottom color=LHScolor!60!black},
+        segmentation style={top color=RHScolor,bottom color=RHScolor!60!black},
+    ]{%
+        \href{#5}{\color{white}#2}%
+    }{%
+        \href{#6}{\color{white}#4}%
+    }%
+}
+
+\def\bilishield{
+    \shield
+        {666666}
+        {\bluebicon{} bilibili}
+        {00a0c8}
+        {Mullato}
+        {https://bilibili.com/}
+        {https://space.bilibili.com/15475629}
+}
+\def\gitshield{
+    \shield
+        {666666}
+        {\ghwhiteicon{} github}
+        {28a745}
+        {RustColeone}
+        {https://github.com/}
+        {https://github.com/RustColeone/}
+}

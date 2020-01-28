@@ -24,6 +24,10 @@
   \end{tikzpicture}%
 }
 
+\def\ghurl#1{%
+    \href{#1}{({\blueghicon{}})}%
+  }
+
 \begin{document}
   \header
 
@@ -35,7 +39,7 @@
         \node[fill=link!10!white, use as bounding box, inner sep=0.25em, font=\small] (t) {\textsc{1st year}}
       }%
     }
-    \item \ongoing{} \textbf{BS Electrical Engineering} \dashdiv{} University of California Santa Barbara \dashdiv{} 2019-2022
+    \item \ongoing{} \textbf{BS Electrical Engineering} \dashdiv{} University of California Santa Barbara \dashdiv{} 2019-2023
 
       Relevant modules \& coursework (able to provide code upon request):
 
@@ -49,7 +53,7 @@
           \begin{itemize}
             \item Digital to analog converter, using R2R Ladder
             \item Experimented with different components and sensors
-            \item Built individual project \dashdiv{} Arduino Gaming Console
+            \item Built individual project \dashdiv{} \href{https://github.com/RustColeone/OLEDGameConsole}{\color{link}\textbf{Arduino Gaming Console}} \ghurl{https://github.com/RustColeone/OLEDGameConsole}
           \end{itemize}
         \end{itemize}
 
@@ -107,10 +111,6 @@
 
   \section{Personal Projects}
 
-  \def\ghurl#1{%
-    \href{#1}{({\blueghicon{}})}%
-  }
-
   \begin{itemize}
 
     \item \href{https://github.com/RustColeone/ArduinoDebugger}{\color{link}\textbf{Arduino Debugger}} \ghurl{https://github.com/RustColeone/ArduinoDebugger}: Single Step Arduino Debugging made cheap and affordable \dashdiv{} 2018 to date.
@@ -131,7 +131,7 @@
       \item A test for adding wireless step by step debug function to Arduino Debugger
     \end{itemize}
 
-    \item \textbf{GameBoy-Pi} \ghurl{https://github.com/RustColeone}: Gameboy built with Arduino \dashdiv{} 2018
+    \item \href{https://github.com/RustColeone/GameBoyPi}{\color{link}\textbf{GameBoy-Pi}} \ghurl{https://github.com/RustColeone/GameBoyPi}: Gameboy built with Arduino \dashdiv{} 2018
 
     \begin{itemize}
       \item Circuit designed by me and manufactured by \href{https://jlcpcb.com/}{\color{link}JLCPCB}
@@ -139,20 +139,20 @@
       \item Bought the gameboy case, screen and other components online
     \end{itemize}
 
-    \item \textbf{Arduino Calculator} \ghurl{https://github.com/RustColeone}: Arduino Calculator(Portable CLI)\dashdiv{} 2017
+    \item \href{https://github.com/RustColeone/}{\color{link}\textbf{Arduino Calculator}} \ghurl{https://github.com/RustColeone}: Arduino Calculator(Portable CLI)\dashdiv{} 2017
 
     \begin{itemize}
       \item The Arduino communicates with the Rasbberry Pi zero, and acts as a keyboard and display.
       \item The display copy and outputs the CLI from the PI Zero.
     \end{itemize}
 
-    \item \textbf{LED Goggle} \ghurl{https://github.com/RustColeone}: Inspired by Wrench (Watch Dogs 2)\dashdiv{} 2017-2018
+    \item \href{https://github.com/RustColeone/LEDEmojiGoggle}{\color{link}\textbf{LED Emoji Goggle}} \ghurl{https://github.com/RustColeone/LEDEmojiGoggle}: Inspired by Wrench (Watch Dogs 2)\dashdiv{} 2017-2018
 
     \begin{itemize}
       \item An goggle with LED Matrix built on to it
       \item LED controlled by CMOS 164 shift register IC
       \item Remotelly controlled with HC-05 bluetooth module and Arduino
-      \item \href{https://www.bilibili.com/video/av33283411/}{\color{link}Video Demonstration Here}
+      \item \href{https://www.bilibili.com/video/av33283411/}{\color{link}Video Demonstration at \bilibiliicon{}}
     \end{itemize}
 
   \end{itemize}
@@ -162,7 +162,24 @@
   \begin{itemize}[itemsep=0.1\parskip]
     \item Interested in animation and some arts; 
     \item Been playing Piano for a long time;
-    \item Video Editiong, \href{https://www.bilibili.com/video/av55212868/}{\color{link}Graduation Video};
+    \item Video Editing
+    \begin{itemize}
+      \item \href{https://www.bilibili.com/video/av55212868/}{\color{link}High School Graduation Video \bilibiliicon{}};
+      \item Sharing the process of how I make my projects.
+      \item Videos to teach my audience something interesting.
+      \item The music I written will also be posted.
+      \item All my videos are uploaded to \href{https://www.bilibili.com/}{\bilibiliicon{}\bilibiliwordicon{}}
+    \end{itemize}
   \end{itemize}
-
+  \mbox{}
+  \vfill{
+    \begin{tikzpicture}
+      \path[draw] ($(bottomleft)+(-0.2cm,0)$) -- ($(bottomright)+(0.2cm,0)$);
+    \end{tikzpicture}%
+    \begin{flushright}
+      \begin{tabular}{ c c }
+        \bilishield{} & \gitshield{}
+      \end{tabular}
+    \end{flushright}
+  }
 \end{document}
