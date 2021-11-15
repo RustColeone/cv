@@ -1,4 +1,70 @@
-\input{styles.tex}
+\documentclass[a4paper]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage[calc,showdow,english]{datetime2}
+\usepackage[margin=1cm]{geometry}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage[most]{tcolorbox}
+\usepackage{inputenc}
+\usepackage{fontenc}
+\usetikzlibrary{calc}
+\graphicspath{{icons/}}
+\input{icons.tex}
+\input{shieldsIO.tex}
+
+\makeatletter
+\DeclareRobustCommand\tlabel{%
+  \tikz[overlay, remember picture, baseline=(nlabel.base)]{\node[anchor=base, inner sep=0pt] (nlabel) {};}%
+}
+\DeclareRobustCommand\posttlabel{%
+  \tikz[overlay, remember picture]{
+    \coordinate (ll) at (nlabel.south -| current page.north west);
+    \path[fill=link] ($(ll)-(0.1cm,0pt)$) rectangle ++(0.2cm, 0.9em);
+  }%
+}
+\renewcommand\section[1]{%
+  \@startsection{section}{1}{\z@}{0.1\baselineskip}{0.1\baselineskip \@minus 0.1\baselineskip}{\bfseries\MakeUppercase}*{\tlabel{}#1\makebox[0pt]{\posttlabel}}%
+}
+\makeatother
+
+\def\dashdiv{{%
+  \def\sp{0.3em minus 0.1em}%
+  \hspace{\sp}%
+  \color{black!50!white}%
+  --%
+  \hspace{\sp}%
+}}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em plus 0.5em minus 0.5em}
+
+\setitemize{topsep=0em, itemsep=0.5\parskip, partopsep=0em, parsep=0.5\parskip}
+
+\colorlet{link}{blue!50!black}
+
+\makeatletter
+\DTMnewdatestyle{my}{%
+    \renewcommand{\DTMDisplaydate}[4]{\DTMshortmonthname{##2} ##1}%
+    \renewcommand{\DTMdisplaydate}{\DTMDisplaydate}%
+}
+\DTMsetdatestyle{my}
+\usepackage[hidelinks, pdftex, pdfauthor={Leo Yan}, pdftitle={Leo Yan - \today}]{hyperref}
+\makeatother
+
+\pagestyle{empty}%
+
+
+
+
+%end of setup
+
+
 
 \def\header{%inkscape -D -z --file=bluegithub.svg --export-pdf=bluegithub.pdf --export-latex
   \DTMsetdatestyle{my}%
@@ -7,7 +73,7 @@
     \coordinate (topright) at (\textwidth, 0);
 
     \node[font=\Large] (name) at (topleft) {Leo Yan};
-    \node (bio) at (name.south west) {{\color{black!50!white}\emph{(\today)}} First year Electrical Engineering undergraduate at\ucsbicon{}\ucsbwordicon{}};
+    \node (bio) at (name.south west) {{\color{black!50!white}\emph{(\today)}} Electrical Engineering undergraduate at\uclaicon{}\uclawordicon{}};
 
     \node[anchor=north east, text width=0.4\textwidth, align=flush right, inner ysep=0cm] (contacts) at (topright)
       {Leo Yan \\
@@ -27,171 +93,186 @@
 \def\ghurl#1{%
     \href{#1}{({\blueghicon{}})}%
   }
+\def\githubURL#1#2{%
+    \href{#1}{\color{link}\textbf{#2}} \ghurl{#1}
+  }
+\def\ongoing#1#2{%
+    \tikz[baseline=(t.base)]{
+        \node[fill=link!10!white, use as bounding box, inner sep=0.25em, font=\small] (t) {\textsc{#1-#2 year}}
+    }%
+}
 
 \begin{document}
-  \header
+    \header
 
-  \section{Education}
-
-  \begin{itemize}
-    \def\ongoing{%
-      \tikz[baseline=(t.base)]{
-        \node[fill=link!10!white, use as bounding box, inner sep=0.25em, font=\small] (t) {\textsc{1st year}}
-      }%
-    }
-    \item \ongoing{} \textbf{BS Electrical Engineering} \dashdiv{} University of California Santa Barbara \dashdiv{} 2019-2023
-
-      Relevant modules \& coursework (able to provide code upon request):
-
-      \begin{itemize}
-
-        \item Intro to ECE (C++)
+    \section{Education}
 
         \begin{itemize}
-          \item Using Arduino for problem solving and project buildings in C++.
-
-          \begin{itemize}
-            \item Digital to analog converter, using R2R Ladder
-            \item Experimented with different components and sensors
-            \item Built individual project \dashdiv{} \href{https://github.com/RustColeone/OLEDGameConsole}{\color{link}\textbf{Arduino Gaming Console}} \ghurl{https://github.com/RustColeone/OLEDGameConsole}
-          \end{itemize}
+          
+            \item \ongoing{1st}{2nd} \textbf{BS Electrical Engineering} \dashdiv{} University of California Santa Barbara \dashdiv{} 2019-2021\\[6pt]
+            \ongoing{3rd}{4th} \textbf{BS Electrical Engineering} \dashdiv{} University of California Los Angeles \dashdiv{} 2021-2023
+        
+              Relevant modules \& coursework:
+        
+            \begin{itemize}
+        
+                \item Hardware and Circuits
+        
+                \begin{itemize}
+                  \item Circuitry
+                    \begin{itemize}
+                        \item Analog Circuit Design
+                        \item Digital Circuit Design
+                        \item Arduino with C++
+                    \end{itemize}
+                \end{itemize}
+        
+                \item Signal Processing
+        
+                \begin{itemize}
+                    \item Learned basics to Signal Processing and applied knowledge with Python.
+                    \begin{itemize}
+                        \item Applied Fourier Transform to different signals to analyze them.
+                        \item FIR Filters
+                        \item Shannon's theories.
+                    \end{itemize}
+                \end{itemize}
+        
+                \item Computer Science
+        
+                \begin{itemize}
+                    \item Programming guidelines and basics
+                    \item Modern tools and software developments in C++
+                    \item Signal processing with Python
+                \end{itemize}
+                
+                \item Project
+                \begin{itemize}
+                    \item Retro Gaming Console \dashdiv{}
+                    \githubURL{https://github.com/RustColeone/HardwareProjectArchive/tree/master/OLEDGameConsole}{Arduino Gaming Console}
+                    \begin{itemize}
+                        \item Arduino Leonardo coded with C++
+                        \item Altera MAX7000 Series IC with verilog
+                        \item PCB designed with PADs
+                    \end{itemize}
+                \end{itemize}
+                
+            \end{itemize}
+              
+        
+            \item \textbf{A-Level } (High School) \dashdiv{} (Shenzhen, China) Nanshan Chinese International College \dashdiv{} 2017-2019 
+            \begin{itemize}
+                \item Further Math, Math, Physics and Chemistry \dashdiv{} A*/A /A*/A /
+            \end{itemize}
         \end{itemize}
 
-        \item Signal Processing (Python)
+    \section{Skills}
 
-        \begin{itemize}
-          \item Learned basics to Signal Processing and applied knowledge with Python.
-          \begin{itemize}
-            \item Applied Fourier Transform to different signals to analyze them.
-            \item FIR Filters to smoothen images in lab.
-            \item Shannon's theories.
-          \end{itemize}
+        \begin{itemize}[itemsep=0.1\parskip]
+            \item Languages: C++, C\#, Python, Verilog, \LaTeX
+        
+            \begin{itemize}
+                \item Coding experience with C++ and Python
+                \item Game Development with C\# in Unity
+                \item This document is written in \LaTeX
+            \end{itemize}
+        
+            \item Circuit Board Designs
+            \begin{itemize}
+                \item Familiar with developing PCBs with PADs
+                \item Coding Verilog in Quartus
+            \end{itemize}
+        
+            \item Web development
+            \begin{itemize}
+                \item Worked with web developers in Tencent.
+                \item Have some experience creating web server.
+            \end{itemize}
+            
+            \item Game development
+            \begin{itemize}
+              \item Building and designing games with Unity coding in C\#.
+            \end{itemize}
+        
         \end{itemize}
 
-        \item Computer Science (C++)
-
-        \begin{itemize}
-          \item Programming guidelines and basics
-          \item Modern tools for software developments in C++
-        \end{itemize}
-      \end{itemize}
-
-    \item \textbf{A-Level} \dashdiv{} (Shenzhen, China) Nanshan Chinese International College \dashdiv{} 2017-2019
-
-      Further Math, Math, Physics and Chemistry \dashdiv{} A*/A /A*/A /
-  \end{itemize}
-
-  \section{Skills}
-
-  \begin{itemize}[itemsep=0.1\parskip]
-    \item Languages: Java, C++, C\#, Python, Verilog, \LaTeX
+    \section{Some Personal Projects}
 
     \begin{itemize}
-      \item Currently learning C++ and Python
-      \item Has experience developing in Quartus
-      \item This documents and the notes I took in class are written in \LaTeX
+
+        \item \githubURL{https://github.com/RustColeone/ArduinoDebugger}{Arduino Debugger}: Single Step Arduino Debugging made cheap and affordable \dashdiv{} 2018.
+
+        \begin{itemize}
+            \item PC and Arduino communicate through serial communication
+            \item PC side runs library identical to Arduino but sents an command instead of executing
+            \item Arduino is programmed to translate the command into corresponding code and execute it
+        \end{itemize}
+        \newpage
+
+        \item \githubURL{https://github.com/RustColeone/HardwareProjectArchive/tree/master/ArduinoRemoteDisplay}{Arduino Remote Display}: Remotelly update display with MQTT protocol\dashdiv{} Oct 2019.
+
+        \begin{itemize}
+            \item Translates an image file with C\# desktop application and sent using MQTT
+            \item Arduino receives and output the images to the epaper display
+            \item A test for adding wireless step by step debug function to Arduino Debugger
+        \end{itemize}
+
+        \item \githubURL{https://github.com/RustColeone/HardwareProjectArchive/tree/master/GameBoyPi}{GameBoy-Pi}: Gameboy built with Arduino \dashdiv{} 2018
+
+        \begin{itemize}
+            \item My PCB design was manufactured by \href{https://jlcpcb.com/}{\color{link}JLCPCB}
+            \item Raspberry Pi 3B running \href{https://retropie.org.uk/}{\color{link}Retro Pi}
+        \end{itemize}
+
+        \item \githubURL{https://github.com/RustColeone/PiPortable}{Arduino Calculator}: Arduino Calculator(Pi Portable)\dashdiv{} 2017
+
+        \begin{itemize}
+            \item Portable Linux CLI.
+        \end{itemize}
+
+        \item \githubURL{https://github.com/RustColeone/LEDEmojiGoggle}{LED Emoji Goggle}: Inspired by Wrench (Watch Dogs 2)\dashdiv{} 2017-2018
+        \begin{itemize}
+            \item LED Matrix with CMOS 164 shift register IC
+            \item Remotelly controlled with HC-05 bluetooth module and Arduino
+            \item \href{https://www.bilibili.com/video/av33283411/}{\color{link}Video Demonstration at \bilibiliicon{}}
+        \end{itemize}
+
+        \item \githubURL{https://github.com/RustColeone/cv}{This CV}\dashdiv{} 2020 todate
+        
+        \begin{itemize}
+            \item \LaTeX \space source code to this cv
+        \end{itemize}
+        
+        \item \githubURL{https://github.com/RustColeone/AVGCreator}{AVG Game Creator}
+        \begin{itemize}
+            \item Reads text file and phrase them in real time to create desired effect
+        \end{itemize}
+
+        \item Others:
+        \begin{itemize}
+            \item \githubURL{https://github.com/RustColeone/GameProjectArchive}{Game Project Archive}
+            \item \githubURL{https://github.com/RustColeone/HardwareProjectArchive}{Hardware Project Archive}
+        \end{itemize}
+
     \end{itemize}
 
-    \item Circuit Board Designs
-    \begin{itemize}
-      \item Familiar with developing Circuit Boards with PADs
-    \end{itemize}
+    \section{Other Interests}
 
-    \item Web development
-    \begin{itemize}
-      \item Worked with web developers in Tencent as an intern.
+    \begin{itemize}[itemsep=0.1\parskip]
+        \item Playing Piano
+        \item Video Editing
+        \item Gaming
     \end{itemize}
     
-    \item Game development
-    \begin{itemize}
-      \item Building and designing games with Unity
-    \end{itemize}
-
-  \end{itemize}
-
-  \section{Personal Projects}
-
-  \begin{itemize}
-
-    \item \href{https://github.com/RustColeone/ArduinoDebugger}{\color{link}\textbf{Arduino Debugger}} \ghurl{https://github.com/RustColeone/ArduinoDebugger}: Single Step Arduino Debugging made cheap and affordable \dashdiv{} 2018 to date.
-
-    \begin{itemize}
-      \item PC and Arduino communicate through serial communication
-      \item HID, bluetooth and WiFi to be supported in the future
-      \item PC side runs library identical to Arduino but sents an command instead of executing
-      \item Arduino is programmed to translate the command into corresponding code and execute it
-    \end{itemize}
-
-    \item \href{https://github.com/RustColeone/ArduinoRemoteDisplay}{\color{link}\textbf{Arduino Remote Display}} \ghurl{https://github.com/RustColeone/ArduinoRemoteDisplay}: Remotelly update display with MQTT protocol\dashdiv{} Oct 2019 to date
-
-    \begin{itemize}
-      \item Translates an image file with C\# desktop application and sent using MQTT
-      \item Arduino receives and output the images to the epaper display
-      \item More display to be supported in the future
-      \item A test for adding wireless step by step debug function to Arduino Debugger
-    \end{itemize}
-
-    \item \href{https://github.com/RustColeone/GameBoyPi}{\color{link}\textbf{GameBoy-Pi}} \ghurl{https://github.com/RustColeone/GameBoyPi}: Gameboy built with Arduino \dashdiv{} 2018
-
-    \begin{itemize}
-      \item Circuit designed by me and manufactured by \href{https://jlcpcb.com/}{\color{link}JLCPCB}
-      \item Based on a Raspberry Pi 3B running \href{https://retropie.org.uk/}{\color{link}Retro Pie}
-      \item Bought the gameboy case, screen and other components online
-    \end{itemize}
-
-    \item \href{https://github.com/RustColeone/PiPortable}{\color{link}\textbf{Arduino Calculator}} \ghurl{https://github.com/RustColeone/PiPortable}: Arduino Calculator(Pi Portable)\dashdiv{} 2017
-
-    \begin{itemize}
-      \item Portable Linux CLI, so I can program and have fun on the go.
-      \item The Arduino communicates with the Rasbberry Pi zero, and acts as a keyboard and display.
-      \item The display copy and outputs the CLI from the PI Zero.
-    \end{itemize}
-
-    \item \href{https://github.com/RustColeone/LEDEmojiGoggle}{\color{link}\textbf{LED Emoji Goggle}} \ghurl{https://github.com/RustColeone/LEDEmojiGoggle}: Inspired by Wrench (Watch Dogs 2)\dashdiv{} 2017-2018
-
-    \begin{itemize}
-      \item An goggle with LED Matrix built on to it
-      \item LED controlled by CMOS 164 shift register IC
-      \item Remotelly controlled with HC-05 bluetooth module and Arduino
-      \item \href{https://www.bilibili.com/video/av33283411/}{\color{link}Video Demonstration at \bilibiliicon{}}
-    \end{itemize}
-
-    \item \href{https://github.com/RustColeone/cv}{\color{link}\textbf{This CV}} \ghurl{https://github.com/RustColeone/cv}\dashdiv{} 2020 todate
-    \begin{itemize}
-      \item \LaTeX \space source code to this cv
-    \end{itemize}
-
-    \item Others:
-    \begin{itemize}
-      \item \href{https://github.com/RustColeone/FGOAutoPlayer}{\color{link}\textbf{FGOAutoPlayer}} \ghurl{https://github.com/RustColeone/FGOAutoPlayer}
-      \item \href{https://github.com/RustColeone/VisualNovelCreator}{\color{link}\textbf{Visual Novel Creator}} \ghurl{https://github.com/RustColeone/VisualNovelCreator}
-    \end{itemize}
-
-  \end{itemize}
-
-  \section{Other Interests}
-
-  \begin{itemize}[itemsep=0.1\parskip]
-    \item Interested in animation and some arts; 
-    \item Been playing Piano for a long time;
-    \item Video Editing
-    \begin{itemize}
-      \item \href{https://www.bilibili.com/video/av55212868/}{\color{link}High School Graduation Video \bilibiliicon{}};
-      \item Sharing the process of how I make my projects.
-      \item Videos to teach my audience something interesting.
-      \item The music I written will also be posted.
-      \item All my videos are uploaded to \href{https://www.bilibili.com/}{\bilibiliicon{}\bilibiliwordicon{}}
-    \end{itemize}
-  \end{itemize}
-  \mbox{}
-  \vfill{
-    \begin{tikzpicture}
-      \path[draw] ($(bottomleft)+(-0.2cm,0)$) -- ($(bottomright)+(0.2cm,0)$);
-    \end{tikzpicture}%
-    \begin{flushright}
-      \begin{tabular}{ c c }
-        \bilishield{} & \gitshield{}
-      \end{tabular}
-    \end{flushright}
-  }
+    \mbox{}
+    \vfill{
+        \begin{tikzpicture}
+            \path[draw] ($(bottomleft)+(-0.2cm,0)$) -- ($(bottomright)+(0.2cm,0)$);
+        \end{tikzpicture}%
+        \begin{flushright}
+            \begin{tabular}{ c c }
+                \bilishield{} & \gitshield{}
+        \end{tabular}
+        \end{flushright}
+    }
 \end{document}
